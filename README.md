@@ -1,2 +1,2 @@
 # CLRS-Solutions
-Swift Solutions to "Introduction to Algorithm, 3rd Edition"
+Swift Version of Solutions to "Introduction to Algorithms, 3rd Edition"
