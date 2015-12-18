@@ -87,25 +87,31 @@ binarySearch1(98, ay: [2,5,7,25,46,78,98])
 func canAddupTo(total:Int,ay:[Int])->Bool{
     guard ay.count >= 2 else {return false}
     var sortedAy = recurseSort(ay)
-    var reverseAy = sortedAy.map{total - $0}
     
-    while sortedAy.count > 0 && reverseAy.count > 0{
-        if sortedAy.first! == reverseAy.last!{
+    var begin = 0
+    var end   = sortedAy.count-1
+    while begin < end{
+        if sortedAy[begin]+sortedAy[end] == total{
             return true
-        }else if sortedAy.first! > reverseAy.last!{
-            reverseAy.removeLast()
+        }else if sortedAy[begin]+sortedAy[end] > total{
+            end--
         }else{
-            sortedAy.removeFirst()
+            begin++
         }
     }
     return false
+  
+//    var reverseAy = sortedAy.map{total - $0}
+//    while sortedAy.count > 0 && reverseAy.count > 0{
+//        if sortedAy.first! == reverseAy.last!{
+//            return true
+//        }else if sortedAy.first! > reverseAy.last!{
+//            reverseAy.removeLast()
+//        }else{
+//            sortedAy.removeFirst()
+//        }
+//    }
+//    return false
 }
 
 canAddupTo(13, ay: [2,3,43,42,3,1,6,5,9,10])
-
-
-
-
-
-
-
