@@ -51,5 +51,46 @@ polyHorner([1,2,3,4,5,6,7,8], x: 13)
 //(1,5)  (2,5)  (3,5) (4,5) (3,4)
 //n*(n-1)/2
 
-private
+func mergeSort(var ay1:[Int],var ay2:[Int])->([Int],Int){
+    var result = [Int]()
+    var inversion = 0
+    while ay1.count > 0 && ay2.count > 0{
+        if ay1[0] <= ay2[0]{
+            result.append(ay1.removeFirst())
+        }else{
+            inversion += ay1.count
+            result.append(ay2.removeFirst())
+        }
+    }
+    
+    result.appendContentsOf(ay1)
+    result.appendContentsOf(ay2)
+    return (result,inversion)
+}
+
+
+func inversionSort(ay:[Int])->([Int],Int){
+    if ay.count <= 1 {return (ay,0)}
+    let middle = ay.count/2
+    
+    var inversion = 0
+    var ay1 = (ay as NSArray).subarrayWithRange(NSMakeRange(0, middle)) as! [Int]
+    var ay2 = (ay as NSArray).subarrayWithRange(NSMakeRange(middle, ay.count-middle)) as! [Int]
+    var result = inversionSort(ay1)
+    ay1 = result.0
+    inversion += result.1
+    
+    result = inversionSort(ay2)
+    ay2 = result.0
+    inversion += result.1
+    
+    result  =  mergeSort(ay1, ay2: ay2 )
+    let ayf    = result.0
+    inversion += result.1
+    
+    return (ayf,inversion)
+}
+
+inversionSort([2,3,8,6,1])
+
 
